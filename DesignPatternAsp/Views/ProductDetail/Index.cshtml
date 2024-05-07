@@ -1,0 +1,20 @@
+﻿
+<!-- PARA AGREGAR CODIGO C# USO :  --> 
+@{
+    decimal total = (decimal)ViewBag.TotalLocal;
+    decimal totalforeign = (decimal)ViewBag.TotalForeign;   
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="mb-3">
+            <label > Total Local : </label>
+            <b> @total </b>
+        </div>
+        <div class="mb-3">
+            <label> Total Foreign : </label>
+            <b> @totalforeign </b>
+        </div>
+    </div>
+
+</div>
