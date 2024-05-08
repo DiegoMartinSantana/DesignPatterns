@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patrones_DiseñoASP", "Patr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatronesDiseño", "PatronesDiseño\PatronesDiseño.csproj", "{3C8E5F33-9CAB-47DB-8164-E6BA02315B8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatronesDiseño.Repository", "PatronesDiseño.Repository\PatronesDiseño.Repository.csproj", "{9277B783-B367-4197-9B73-6CDE96B9605C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatronesDiseño.Models", "PatronesDiseño.Models\PatronesDiseño.Models.csproj", "{0B3AA418-E9B7-4CA8-A901-EFDE2D2F9A26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{3C8E5F33-9CAB-47DB-8164-E6BA02315B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8E5F33-9CAB-47DB-8164-E6BA02315B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C8E5F33-9CAB-47DB-8164-E6BA02315B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9277B783-B367-4197-9B73-6CDE96B9605C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9277B783-B367-4197-9B73-6CDE96B9605C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9277B783-B367-4197-9B73-6CDE96B9605C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9277B783-B367-4197-9B73-6CDE96B9605C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3AA418-E9B7-4CA8-A901-EFDE2D2F9A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3AA418-E9B7-4CA8-A901-EFDE2D2F9A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3AA418-E9B7-4CA8-A901-EFDE2D2F9A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3AA418-E9B7-4CA8-A901-EFDE2D2F9A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

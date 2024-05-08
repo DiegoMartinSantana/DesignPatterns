@@ -1,5 +1,10 @@
-﻿using PatronesDiseño.Factory_Method;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
+using PatronesDiseño.Factory_Method;
+using PatronesDiseño.models;
+using PatronesDiseño.RepositoryPattern;
 using PatronesDiseño.Singleton;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 namespace PatronesDiseño
@@ -32,11 +37,104 @@ namespace PatronesDiseño
             ISale salePhone = PhoneFactory.Vender();
             salePhone.Vender(500);
 
-            ISale saleCatalog = CatalogFactory.Vender();    
+            ISale saleCatalog = CatalogFactory.Vender();
             saleCatalog.Vender(300);
 
             ISale salePhysical = PhysicalFactory.Vender();
             salePhysical.Vender(500000);
+            #endregion
+
+            #region ENTITY
+
+            //USO DE IMEDICO REPOSITORY
+            using(var context = new DiagnosticoContext())
+            {
+                var medicoRepository = new MedicoRepository(context);
+
+                var listadoMedicos = medicoRepository.GetAll();
+                foreach (var medico in listadoMedicos)
+                {
+                    Console.WriteLine(medico.Nombre);
+                }
+            }   
+
+
+            using (var context = new DiagnosticoContext())
+            {
+
+                var listadoMedicos = context.Medicos.ToList();
+                foreach (var medico in listadoMedicos)
+                {
+                    Console.WriteLine(medico.Nombre);
+                }
+                //INNER JOIN 
+                var listadoMedicosOrdenada = (from m in context.Medicos
+                                              join t in context.Turnos on m.Idmedico equals t.Idmedico
+                                              join e in context.Especialidades on m.Idespecialidad equals e.Idespecialidad
+                                              join p in context.Pacientes on t.Idpaciente equals p.Idpaciente
+                                              orderby m.Nombre
+                                              select new
+                                              {
+                                                  MedicoNombre = m.Nombre,
+                                                  TurnoFecha = t.Fechahora,
+                                                  EspecialidadMedico = e.Nombre,
+                                                  PacienteAtendido = p.Nombre
+                                              });
+
+                foreach (var item in listadoMedicosOrdenada)
+                {
+                    Console.WriteLine(item.MedicoNombre);
+                    Console.WriteLine(item.TurnoFecha);
+                    Console.WriteLine(item.EspecialidadMedico);
+
+                    Console.WriteLine(item.PacienteAtendido);
+                }
+
+
+                //LEFT JOIN 
+
+                //pacietnes sin turnos asociados y con tambien
+                var LeftJoin = (from p in context.Pacientes
+                                join t in context.Turnos on p.Idpaciente equals t.Idpaciente into pacientesCONYSINTURNOS
+                                from turnocontenido in pacientesCONYSINTURNOS.DefaultIfEmpty() ///DONDE LOS TURNOS EN ESO SEAN NULOS
+                                orderby p.Nombre
+                                select new
+                                {
+                                    IdPaciente =p.Idpaciente,
+                                    Paciente = p.Nombre,
+                                    Turno = turnocontenido == null ? "No posee turno" : turnocontenido.Fechahora.ToString()
+                                }
+                                );
+              
+
+                Console.WriteLine("PACIENTES CON Y SIN TURNOS*********************************");
+                foreach(var item in LeftJoin)
+                {
+                    Console.WriteLine(item.Paciente);
+                    Console.WriteLine(item.Turno);
+                }
+                //RIGTH JOIN 
+                //CAMBIO ORDEN TABLAS 
+
+
+            };
+            #endregion
+
+            #region ENTITY WITH REPOSITORY
+
+            using (var context = new DiagnosticoContext())
+            {
+                var Repository_ObrasSo = new Repository<ObrasSociale>(context); //uso de forma generica el repositorty para este modelo
+                var Repository_Especialidades = new Repository<Especialidade>(context); //uso para esta otra entidad el  mismo repository
+
+                var espe = new Especialidade();
+                espe.Idespecialidad = 15416526;
+                espe.Nombre = "deigo esdadadadada";
+                Repository_Especialidades.Add(espe);
+                Repository_Especialidades.Save();
+               
+            };
+
             #endregion
 
         }

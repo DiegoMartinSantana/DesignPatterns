@@ -1,4 +1,7 @@
 using DesignPatternAsp;
+using Microsoft.EntityFrameworkCore;
+using PatronesDiseño.Models.Data;
+using PatronesDiseño.Repository;
 using Tools.Earn;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<MyOptions>(builder.Configuration.GetSection("MyOptions"));
+//añado el contexto de mi bd
+builder.Services.AddDbContext<DiagnosticoContext>(
+    options => {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
+    });
 
+
+//PARA QUE RECIBA LAS INTERFACES Y SU IMPLEMENTACION X INYECCION Y NO SE ENCARGUE DE CREARLA ELLA.
+builder.Services.AddScoped(typeof(IPatronesDiseñoRepository<>), typeof(PatronesDiseñoRepository<>)); 
 //inyecto la fabrica
 
 builder.Services.AddTransient((factory) =>
