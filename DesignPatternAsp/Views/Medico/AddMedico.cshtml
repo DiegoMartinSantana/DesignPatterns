@@ -1,0 +1,65 @@
+﻿@model DesignPatternAsp.Models.ViewModels.MedicoViewModel
+@{
+    ViewData["Title"] = "Agregar Medico";
+}
+<form asp-controller="Medico" asp-action="AddMedico" method="post">
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input class="form-control" asp-for="Id" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Apellido"></label>
+        <input class="form-control" asp-for="Apellido" />
+        <span asp-validation-for="Apellido" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FechaNacimiento"></label>
+        <input type="date" class="form-control" asp-for="FechaNacimiento" />
+        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdEspecialidad"></label>
+        <select class="form-control" asp-for="IdEspecialidad" asp-items="@ViewBag.Especialidades">
+            <option value=""> --- Seleccione una especialidad </option>
+        </select>
+        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EspecialidadNueva"></label>
+        <input class="form-control" asp-for="EspecialidadNueva" />
+    </div>
+    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+
+    <div class="form-group">
+        <label asp-for="FechaIngreso"></label>
+        <input type="date" class="form-control" asp-for="FechaIngreso" />
+        <span asp-validation-for="FechaIngreso" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CostoConsulta"></label>
+        <input class="form-control" asp-for="CostoConsulta" />
+        <span asp-validation-for="CostoConsulta" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Sexo"></label>
+        <input class="form-control" asp-for="Sexo" />
+        <span asp-validation-for="Sexo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit"> Guardar</button>
+    </div>
+</form>

@@ -11,7 +11,8 @@ namespace PatronesDiseño.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private PatronesDiseñoRepository<Paciente> _Pacientes { get; }
-
+        private PatronesDiseñoRepository<Especialidade> _Especialidades { get; }
+        private PatronesDiseñoRepository<Medico> _Medicos { get; }
         private PatronesDiseñoRepository<Turno> _Turnos { get; }
         private readonly DiagnosticoContext _context;
 
@@ -37,6 +38,21 @@ namespace PatronesDiseño.Repository
             }
         }
 
+        public IPatronesDiseñoRepository<Medico> RepositoryMedico
+        {
+            get
+            {
+                return _Medicos == null ? new PatronesDiseñoRepository<Medico>(_context) : _Medicos;
+            }
+        }
+
+        public IPatronesDiseñoRepository<Especialidade> RepositoryEspecialidade
+        {
+            get
+            {
+                return _Especialidades == null ? new PatronesDiseñoRepository<Especialidade>(_context) : _Especialidades;   
+            }
+        }
         public void Save()
         {
             _context.SaveChanges();

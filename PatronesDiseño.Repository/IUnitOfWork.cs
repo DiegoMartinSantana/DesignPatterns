@@ -12,7 +12,9 @@ namespace PatronesDiseño.Repository
         public IPatronesDiseñoRepository<Paciente> RepositoryPaciente { get; }
         public IPatronesDiseñoRepository<Turno> RepositoryTurno{ get; }
 
+        public IPatronesDiseñoRepository<Medico> RepositoryMedico { get; }
 
+        public IPatronesDiseñoRepository<Especialidade> RepositoryEspecialidade { get; }
         public void Save();
     }
 }
