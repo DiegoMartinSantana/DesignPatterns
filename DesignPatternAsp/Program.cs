@@ -14,7 +14,8 @@ builder.Services.AddDbContext<DiagnosticoContext>(
     options => {
         options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
     });
-
+//añado unitofwork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //PARA QUE RECIBA LAS INTERFACES Y SU IMPLEMENTACION X INYECCION Y NO SE ENCARGUE DE CREARLA ELLA.
 builder.Services.AddScoped(typeof(IPatronesDiseñoRepository<>), typeof(PatronesDiseñoRepository<>)); 

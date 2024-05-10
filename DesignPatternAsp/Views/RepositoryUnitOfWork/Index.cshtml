@@ -1,0 +1,14 @@
+﻿@model IEnumerable<DesignPatternAsp.Models.ViewModels.TurnosViewModel>
+
+<div class="text-center">
+    <div>
+        <a class="btn btn-primary" href="~/RepositoryUnitOfWork/Add" >Agregar Turno</a>
+        @foreach (var turno in Model)
+        {
+            <p>@turno.IdMedico</p>
+            <p>@turno.Duracion</p>
+            <p>@turno.Fecha</p>
+            <p>@turno.IdPaciente</p>
+        }
+    </div>
+</div>

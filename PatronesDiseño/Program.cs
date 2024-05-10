@@ -4,6 +4,7 @@ using PatronesDiseño.Factory_Method;
 using PatronesDiseño.models;
 using PatronesDiseño.RepositoryPattern;
 using PatronesDiseño.Singleton;
+using PatronesDiseño.UnitofWork;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
@@ -21,7 +22,7 @@ namespace PatronesDiseño
             Console.WriteLine("Hello, World!");
             #endregion
 
-
+            
             #region FACTORY METHOD
             //CREO LAS FABRICAS CONCRETAS
 
@@ -137,6 +138,25 @@ namespace PatronesDiseño
 
             #endregion
 
+            #region UnitOfWork
+            using (var context = new DiagnosticoContext())
+            {
+                //UNIT OF WORK ME PERMITE TRABAJAR Y MANDAR AL FINALIZAR, PARA NO IR Y VENIR HACIA LA BD
+                var Unit = new UnitOfWork(context);
+
+                Unit.MedicoRepository.Delete(20);
+                Unit.RepositoryPaciente.Delete(66);
+
+                // Y MANDO LOS DOS  A LA VEZ
+
+                Unit.Save();
+
+
+
+
+
+            };
+            #endregion
         }
     }
 }
