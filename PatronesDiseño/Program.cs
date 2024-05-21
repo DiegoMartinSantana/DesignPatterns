@@ -4,6 +4,7 @@ using PatronesDiseño.Factory_Method;
 using PatronesDiseño.models;
 using PatronesDiseño.RepositoryPattern;
 using PatronesDiseño.Singleton;
+using PatronesDiseño.Strategy;
 using PatronesDiseño.UnitofWork;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
@@ -123,40 +124,50 @@ namespace PatronesDiseño
 
             #region ENTITY WITH REPOSITORY
 
-            using (var context = new DiagnosticoContext())
-            {
-                var Repository_ObrasSo = new Repository<ObrasSociale>(context); //uso de forma generica el repositorty para este modelo
-                var Repository_Especialidades = new Repository<Especialidade>(context); //uso para esta otra entidad el  mismo repository
+            /*    using (var context = new DiagnosticoContext())
+                 {
+                     var Repository_ObrasSo = new Repository<ObrasSociale>(context); //uso de forma generica el repositorty para este modelo
+                     var Repository_Especialidades = new Repository<Especialidade>(context); //uso para esta otra entidad el  mismo repository
 
-                var espe = new Especialidade();
-                espe.Idespecialidad = 15416526;
-                espe.Nombre = "deigo esdadadadada";
-                Repository_Especialidades.Add(espe);
-                Repository_Especialidades.Save();
-               
-            };
+                     var espe = new Especialidade();
+                     espe.Idespecialidad = 15416526;
+                     espe.Nombre = "deigo esdadadadada";
+                     Repository_Especialidades.Add(espe);
+                     Repository_Especialidades.Save();
 
+                 };
+            */
             #endregion
 
             #region UnitOfWork
-            using (var context = new DiagnosticoContext())
-            {
-                //UNIT OF WORK ME PERMITE TRABAJAR Y MANDAR AL FINALIZAR, PARA NO IR Y VENIR HACIA LA BD
-                var Unit = new UnitOfWork(context);
+            /*  using (var context = new DiagnosticoContext())
+              {
+                  //UNIT OF WORK ME PERMITE TRABAJAR Y MANDAR AL FINALIZAR, PARA NO IR Y VENIR HACIA LA BD
+                  var Unit = new UnitOfWork(context);
 
-                Unit.MedicoRepository.Delete(20);
-                Unit.RepositoryPaciente.Delete(66);
+                  Unit.MedicoRepository.Delete(20);
+                  Unit.RepositoryPaciente.Delete(66);
 
-                // Y MANDO LOS DOS  A LA VEZ
+                  // Y MANDO LOS DOS  A LA VEZ
 
-                Unit.Save();
-
-
+                  Unit.Save();
 
 
 
-            };
+
+
+              };*/
             #endregion
-        }
-    }
+
+            #region STRATEGY
+            //recibe cualquier tipo que implemetne dicha interfaz
+            var contextStrategy = new Context(new BikeStrategy());
+  contextStrategy.Move(); 
+  contextStrategy.Strategy = new CarStrategy(); // cambio de estrategia dinamicamente 
+  contextStrategy.Move();
+
+
+  #endregion
+}
+}
 }

@@ -10,10 +10,10 @@ namespace PatronesDiseño.RepositoryPattern
     public interface IRepository<TEntity>
     {
 
-        public TEntity GetById(int id);
+        public TEntity GetById(long id);
         public void Add(TEntity entity);
         public void Update(TEntity entity);
-        public void Delete(int id);
+        public void Delete(long id);
         public IEnumerable<TEntity> GetAll();
         public void Save();
     }

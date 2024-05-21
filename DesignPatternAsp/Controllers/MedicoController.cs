@@ -1,4 +1,5 @@
 ﻿using DesignPatternAsp.Models.ViewModels;
+using DesignPatternAsp.Strategies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -53,38 +54,12 @@ namespace DesignPatternAsp.Controllers
 
                 return View("AddMedico", medicoVM);
             }
-            // si es valido lleno el objeto a enviar a la BD.
-            var medico = new Medico();
+            // solo usa la estrategia para ADD Medicos.
 
-            medico.Idmedico = medicoVM.Id;
-            //valido si ingreso un id de espcialidad
-            if(medicoVM.IdEspecialidad == null) // si no ingreso una especialidad, ingreso una nueva!
-            {
-                var nuevaEspecialidad = new Especialidade();
-                nuevaEspecialidad.Nombre = medicoVM.EspecialidadNueva;
-                var randomInt  = new Random();
-                //no valido x que son ejemplos.
-                nuevaEspecialidad.Idespecialidad = randomInt.Next(200,500); // genero un id random
-                // gracias a unitof work ,añado la nueva especialidad a la BD,pero envio todo junto
-                _unitOfWork.RepositoryEspecialidade.Add(nuevaEspecialidad);            
-            }
-            else
-            {
-                medico.Idespecialidad = (int)medicoVM.IdEspecialidad;
-                //asigna id porque el value de la lista que envio a la vista es el ID
+            var MedStrategy = new MedicoStrategy();
 
-            }
-            medico.Nombre = medicoVM.Name;
-            medico.Apellido = medicoVM.Apellido;
-            medico.Fechanac = medicoVM.FechaNacimiento;
-            medico.Fechaingreso = medicoVM.FechaIngreso;
-            medico.CostoConsulta = medicoVM.CostoConsulta;
-            medico.Sexo = medicoVM.Sexo;
+            MedStrategy.Add(medicoVM, _unitOfWork);
 
-            _unitOfWork.RepositoryMedico.Add(medico);
-
-            //AÑADO TODO JUNTO A LA BD 
-            _unitOfWork.Save(); 
 
 
            return  RedirectToAction("Index"); 

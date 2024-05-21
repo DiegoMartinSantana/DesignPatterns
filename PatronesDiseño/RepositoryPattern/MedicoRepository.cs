@@ -19,7 +19,7 @@ namespace PatronesDiseño.RepositoryPattern
 
         public void Add(Medico medico) => _context.Add(medico);
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             var medico = _context.Medicos.Find(id);
             _context.Medicos.Remove(medico);

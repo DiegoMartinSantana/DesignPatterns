@@ -23,7 +23,7 @@ namespace PatronesDiseño.RepositoryPattern
             _dbSet.Add( entity );   
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             var entity = _dbSet.Find( id );
             if ( entity != null )
@@ -34,7 +34,7 @@ namespace PatronesDiseño.RepositoryPattern
 
         public IEnumerable<TEntity> GetAll() => _dbSet.ToList();
 
-        public TEntity GetById(int id) => _dbSet.Find(id);
+        public TEntity GetById(long id) => _dbSet.Find(id);
         
 
         public void Save()

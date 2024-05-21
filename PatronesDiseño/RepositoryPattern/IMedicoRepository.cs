@@ -11,7 +11,7 @@ namespace PatronesDiseño.RepositoryPattern
     {
         public void Add(Medico medico);
         public void Update(Medico medico);  
-        public void Delete(int id);
+        public void Delete(long id);
         public Medico GetById(int id);
         public IEnumerable<Medico> GetAll();
         public void Save();
