@@ -5,6 +5,7 @@ using PatronesDiseño.Factory_Method;
 using PatronesDiseño.models;
 using PatronesDiseño.RepositoryPattern;
 using PatronesDiseño.Singleton;
+using PatronesDiseño.State;
 using PatronesDiseño.Strategy;
 using PatronesDiseño.UnitofWork;
 using System.ComponentModel.DataAnnotations;
@@ -181,6 +182,27 @@ namespace PatronesDiseño
 
             #endregion
 
+            #region STATE
+
+            var contextCustomer =  new CustomerContext();
+            Console.WriteLine(contextCustomer.GetState());
+
+            //al crearse es nuevo
+            //seteo saldo
+            contextCustomer.Request(1000); // su estado es nuevo = aplica el saldo
+            // y lo vuelve no deudor
+           Console.WriteLine(contextCustomer.GetState());
+            // aplica una compra
+
+            contextCustomer.Request(500); // compra de 500
+            Console.WriteLine(contextCustomer.GetState());
+
+            contextCustomer.Request(500); // compra de 500
+            Console.WriteLine(contextCustomer.GetState());
+
+
+
+            #endregion
         }
     }
 }
