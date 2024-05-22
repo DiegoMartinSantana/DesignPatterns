@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
+using PatronesDiseño.Builder;
 using PatronesDiseño.Factory_Method;
 using PatronesDiseño.models;
 using PatronesDiseño.RepositoryPattern;
@@ -167,7 +168,19 @@ namespace PatronesDiseño
   contextStrategy.Move();
 
 
-  #endregion
-}
-}
+            #endregion
+
+            #region Builder
+            var Drink = new DrinkConcreteBuilder();
+            var Director = new DrinkDirector(Drink);
+
+            Director.MakeDrink();
+
+
+
+
+            #endregion
+
+        }
+    }
 }

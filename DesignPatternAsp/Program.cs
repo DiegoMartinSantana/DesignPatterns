@@ -2,6 +2,7 @@ using DesignPatternAsp;
 using Microsoft.EntityFrameworkCore;
 using PatronesDiseño.Models.Data;
 using PatronesDiseño.Repository;
+using Tools.BuilderGenerator;
 using Tools.Earn;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<DiagnosticoContext>(
     });
 //añado unitofwork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//add buildergenerator
+builder.Services.AddScoped<GeneratorConcreteBuilder>();
 
 //PARA QUE RECIBA LAS INTERFACES Y SU IMPLEMENTACION X INYECCION Y NO SE ENCARGUE DE CREARLA ELLA.
 builder.Services.AddScoped(typeof(IPatronesDiseñoRepository<>), typeof(PatronesDiseñoRepository<>)); 
